@@ -1,17 +1,23 @@
+
 name: Hello
+
 on:
   push:
   workflow_dispatch:
+
 jobs:
   greet:
     runs-on: ubuntu-latest
     steps:
       - name: コードを取ってくる
         uses: actions/checkout@v7
+
       - name: あいさつ
         run: echo "Hello, GitHub Actions!"
+
       - name: 実行した人を表示
         run: echo "実行した人：${{ github.actor }}"
+
       - name: ランナーを調べる
         run: |
           uname -a
@@ -19,6 +25,7 @@ jobs:
           npm -v
           pwd
           ls -la
+
       - name: 実行の情報を表示
         run: |
           echo "イベント：${{ github.event_name }}"
@@ -26,11 +33,10 @@ jobs:
           echo "コミット：${{ github.sha }}"
           echo "リポジトリ：${{ github.repository }}"
           echo "ランナーの OS：${{ runner.os }}"
-        goodbye:
+
+  goodbye:
     needs: greet
     runs-on: ubuntu-latest
     steps:
       - name: お別れ
         run: echo "greet が終わったので goodbye です"
-
-
